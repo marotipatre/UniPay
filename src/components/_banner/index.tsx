@@ -10,8 +10,8 @@ import { CHAIN_NAME } from "@/config";
 import { useState } from "react";
 const Banner = () => {
   const [chainName, setChainName] = useState(CHAIN_NAME);
-  function onChainChange(chainName) {
-    setChainName(chainName);
+  function onChainChange(chainName?: string) {
+    setChainName(chainName ?? CHAIN_NAME);
   }
   const { account } = useWallet();
   // const { userType, setUserType }: any = useUser();
@@ -22,7 +22,7 @@ const Banner = () => {
 
     try {
       const response = await fetch(
-        `https://gigster-backend-ztso.onrender.com/api/find_usertype/${account?.address}`
+        `http://localhost:4000/api/find_usertype/${account?.address}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -92,43 +92,43 @@ const Banner = () => {
               <div className="relative flex-col sm:space-x-4">
                 <div>
                   <Link
-                  href="/become-sponser"
-                  className="flex w-[40%] items-center px-6 py-3 mb-3 text-lg text-white bg-black  bg-gradient-to-r from-black via-black to-blue-900 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
-                >
-                  Organiser
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 ml-1"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    href="/become-sponser"
+                    className="flex w-[40%] items-center px-6 py-3 mb-3 text-lg text-white bg-black  bg-gradient-to-r from-black via-black to-blue-900 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
                   >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-                <Link
-                  href="/become-hunter"
-                  className="flex w-[40%] mt-4 items-center px-6 py-3 mb-3 text-lg text-white bg-black  bg-gradient-to-l from-black via-black to-blue-900 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
-                >
-                  Builder
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 ml-1"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    Organiser
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-5 h-5 ml-1"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </Link>
+                  <Link
+                    href="/become-hunter"
+                    className="flex w-[40%] mt-4 items-center px-6 py-3 mb-3 text-lg text-white bg-black  bg-gradient-to-l from-black via-black to-blue-900 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
                   >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
+                    Builder
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-5 h-5 ml-1"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </Link>
                 </div>
                 <Wallet chainName={chainName} onChainChange={onChainChange} />
               </div>
