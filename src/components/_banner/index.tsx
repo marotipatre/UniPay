@@ -5,14 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import GlobeScene from "../../components/Globe";
-import { Wallet } from "@/components/wallet";
-import { CHAIN_NAME } from "@/config";
+
 import { useState } from "react";
 const Banner = () => {
-  const [chainName, setChainName] = useState(CHAIN_NAME);
-  function onChainChange(chainName?: string) {
-    setChainName(chainName ?? CHAIN_NAME);
-  }
+
   const { account } = useWallet();
   // const { userType, setUserType }: any = useUser();
   const route = useRouter();
@@ -130,7 +126,7 @@ const Banner = () => {
                     </svg>
                   </Link>
                 </div>
-                <Wallet chainName={chainName} onChainChange={onChainChange} />
+              
               </div>
             </div>
           </div>

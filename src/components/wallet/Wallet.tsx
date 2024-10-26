@@ -66,8 +66,8 @@ export function Wallet({
   }, []);
 
   return (
-    <Box py="$16">
-      <Box mx="auto" maxWidth="28rem" attributes={{ mb: "$12" }}>
+    <div className="flex justify-center items-center gap-5">
+      <Box> 
         <ChainSelect
           chains={chains}
           chainName={chain.chain_name}
@@ -84,10 +84,6 @@ export function Wallet({
          
         }}
       >
-        {username ? <User name={username} /> : null}
-        {address
-          ? <ClipboardCopyText text={address} truncate="middle" />
-          : null}
         <Box
           flex="1"
           width="full"
@@ -103,6 +99,6 @@ export function Wallet({
           ? <Warning text={`${wallet?.prettyName}: ${message}`} />
           : null}
       </Stack>
-    </Box>
+    </div>
   );
 }
