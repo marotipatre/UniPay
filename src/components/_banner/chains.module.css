@@ -1,0 +1,27 @@
+.chainsContainer {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chainScroller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping of items */
+}
+
+.chainItem {
+    flex: 0 0 auto;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.chainImage {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}

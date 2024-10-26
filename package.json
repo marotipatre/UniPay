@@ -1,5 +1,5 @@
 {
-  "name": "gigster",
+  "name": "unipay",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -42,10 +42,12 @@
     "react-dom": "^18",
     "react-markdown": "^9.0.1",
     "react-slick": "^0.30.2",
+    "react-tsparticles": "^2.12.2",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.169.0"
+    "three": "^0.169.0",
+    "tsparticles": "^3.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

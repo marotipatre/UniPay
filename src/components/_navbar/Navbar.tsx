@@ -49,10 +49,16 @@ const Navbar = () => {
               <Link href="/swap" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
                 Bridge
               </Link>
+              <Link href="" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+                Extension
+              </Link>
+              <Link href="" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+                SDK
+              </Link>
               <a href="#faqs" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
                 FAQs
               </a>
-              <Link href="/get-in-touch" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+              <Link href="https://quickest-reaction-568.notion.site/UniPay-Claim-Bounties-Across-any-chain-no-gas-no-hassle-127a260a8fdc808ebde3d55d93c326f6?pvs=4" target="_blank" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
                 Docs
               </Link>
             </nav>
