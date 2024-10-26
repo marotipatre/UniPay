@@ -3,8 +3,13 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { WalletSelector } from '../WalletSelector';
-
+import { Wallet } from "@/components/wallet";
+import { CHAIN_NAME } from "@/config";
 const Navbar = () => {
+  const [chainName, setChainName] = useState(CHAIN_NAME);
+  function onChainChange(chainName) {
+    setChainName(chainName);
+  }
   const [theme, setTheme] = useState('light');
  
   useEffect(() => {
@@ -63,14 +68,9 @@ const Navbar = () => {
               </Link>
             </nav>
           </div>
-          <div className="flex items-center">
-            <button
-              onClick={toggleTheme}
-              className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
-            >
-              {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-            </button>
-   
+          <div className="flex">
+           
+            <Wallet chainName={chainName} onChainChange={onChainChange} />
           </div>
         </div>
       </section>
