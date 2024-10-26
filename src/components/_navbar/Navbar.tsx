@@ -46,7 +46,7 @@ const Navbar = () => {
               <a href="#feature-gigs" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
                 Explore Hacks
               </a>
-              <Link href="/swap" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+              <Link href="" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
                 Bridge
               </Link>
               <Link href="" className="mr-5 font-medium leading-6 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
