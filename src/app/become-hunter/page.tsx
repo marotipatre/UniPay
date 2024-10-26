@@ -62,7 +62,7 @@ export default function BecomeHunter() {
             });
             if (response.ok) {
                 toast({
-                    title: 'You have become hunter now'
+                    title: 'You are ready to claim your prize w/o adding extra gas!'
                 })
                 setLoading(false)
                 router.push('/dashboard')
@@ -82,7 +82,7 @@ export default function BecomeHunter() {
             <Navbar />
             <div className="w-screen h-screen mt-24 flex justify-center items-center ">
                 <div className="w-[600px] flex justify-center items-center flex-col rounded-xl">
-                    <span className="text-slate-800 text-xl font-bold text-center p-2">Welcome to Move club</span>
+                    <span className="text-slate-800 text-xl font-bold text-center p-2">Welcome to UniPay</span>
                     <form className="flex justify-center items-start flex-col shadow-md mt-4 w-full p-6" onSubmit={handleSubmit}>
                         <div className="flex justify-between items-center flex-row w-full">
                             <div className="flex flex-col w-full mr-2">
@@ -128,7 +128,7 @@ export default function BecomeHunter() {
                             <input placeholder='Your short bio' name="bio" value={formData.bio} onChange={handleChange} type="text" className="text-[14px] w-full p-[6px] rounded-lg transition-all border-[2px] border-slate-300 outline-none focus:border-sky-500 focus:border-[3px]" required />
                         </div>
                         {loading ? <button type="submit" className="text-lg p-3 text-white bg-slate-800 rounded-lg w-full mt-6"></button>
-                            : <button type="submit" className="text-lg p-3 text-white bg-slate-900 hover:bg-slate-700 transition-colors rounded-lg w-full mt-6">Become Hunter</button>}
+                            : <button type="submit" className="text-lg p-3 text-white bg-slate-900 hover:bg-slate-700 transition-colors rounded-lg w-full mt-6">Join Builder Squad</button>}
                     </form>
                 </div>
             </div>

@@ -122,7 +122,11 @@ const Banner = () => {
           </div>
         </div>
       </div>
+      <div className="announcement bg-yellow-200 text-yellow-800 font-bold p-2 rounded-md my-4">
+    Our SDK & Extension going live soon!
+  </div>
     </section>
+   
   );
 };
 
