@@ -1,0 +1,21 @@
+.hackathonScroller {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding: 0 16px; /* Add padding to keep content within margins */
+    width: 80%; /* Ensure it takes full width */
+    box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+.hackathonItem {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    margin-right: 16px; /* Adjust spacing between cards as needed */
+}
+
+/* Hide scrollbar for Webkit browsers */
+.hackathonScroller::-webkit-scrollbar {
+    display: none;
+}
