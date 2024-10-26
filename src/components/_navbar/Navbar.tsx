@@ -70,7 +70,7 @@ const Navbar = () => {
             >
               {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
             </button>
-            <WalletSelector />
+            
           </div>
         </div>
       </section>
