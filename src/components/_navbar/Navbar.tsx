@@ -6,7 +6,7 @@ import { WalletSelector } from '../WalletSelector';
 
 const Navbar = () => {
   const [theme, setTheme] = useState('light');
-
+ 
   useEffect(() => {
     if (localStorage.getItem('theme') === 'dark') {
       document.documentElement.classList.add('dark');
@@ -70,7 +70,7 @@ const Navbar = () => {
             >
               {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
             </button>
-            
+   
           </div>
         </div>
       </section>
