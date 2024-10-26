@@ -5,14 +5,15 @@ import Footer from "@/components/_navbar/Footer";
 import Navbar from "@/components/_navbar/NavbarHunter";
 import Navbar2 from "@/components/_navbar/NavbarSponser";
 import { useUser } from "@/context/UserContext";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useChain } from "@cosmos-kit/react";
 // import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { CHAIN_NAME } from "@/config";
 
 export default function Dashboard() {
   //   const { userType }: any = useUser();
-  const { account } = useWallet();
+  const { address, status, connect } = useChain(CHAIN_NAME);
   const [bounties, setBounties] = useState<any>([]);
   const [loading, setLoading] = useState<Boolean>(false);
   const [user, setUser] = useState<any>("");
@@ -20,11 +21,11 @@ export default function Dashboard() {
   //   const toast = useToast()
 
   const fetchBounties = async () => {
-    if (account === null) router.push("/");
+    if (address === null) router.push("/");
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/find_usertype/${account?.address}`
+        `http://localhost:4000/api/find_usertype/${address}`
       );
       if (response.ok) {
         const data: any = await response.json();
@@ -42,12 +43,12 @@ export default function Dashboard() {
           setLoading(true);
           const response = await fetch(
             data.userType === "sponser"
-              ? `http://localhost:4000/api/get_sponser_bounties/${account?.address}`
+              ? `http://localhost:4000/api/get_sponser_bounties/${address}`
               : `http://localhost:4000/api/get_all_bounties`
           );
           if (response.ok) {
             const data: any = await response.json();
-
+              console.log("data", data);
             setBounties(data);
             setLoading(false);
           } else {
@@ -68,9 +69,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchBounties();
-  }, [account?.address]);
+  }, [address]);
 
-  if (!account) return;
+  if (address) return;
 
   return (
     <>

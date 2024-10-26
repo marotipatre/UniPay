@@ -2,13 +2,12 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { WalletSelector } from '../WalletSelector';
 import { Wallet } from "@/components/wallet";
 import { CHAIN_NAME } from "@/config";
 const Navbar = () => {
   const [chainName, setChainName] = useState(CHAIN_NAME);
-  function onChainChange(chainName) {
-    setChainName(chainName);
+  function onChainChange(chainName?: string) {
+    setChainName(chainName || CHAIN_NAME);
   }
   const [theme, setTheme] = useState('light');
  

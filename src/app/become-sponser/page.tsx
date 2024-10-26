@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import Footer from "@/components/_navbar/Footer";
 import Navbar from "@/components/_navbar/Navbar";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useChain } from "@cosmos-kit/react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { CHAIN_NAME } from "@/config";
 
 export default function BecomeSponser() {
-  const { account } = useWallet();
+  const { address, status, connect } = useChain(CHAIN_NAME);
   const router = useRouter();
   const { toast } = useToast();
   const [formData, setFormData] = useState<any>({
@@ -20,8 +21,6 @@ export default function BecomeSponser() {
     bio: "",
     walletAddress: "",
   });
-  // const toast = useToast()
-  console.log("account ", account);
 
   const handleChange = (e: any) => {
     setFormData({
@@ -33,7 +32,7 @@ export default function BecomeSponser() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (account === null) {
+    if (!address) {
       toast({
         title: "Wallet connection required.",
         description: "You need to connect Cosmos wallet",
@@ -42,7 +41,7 @@ export default function BecomeSponser() {
     }
 
     try {
-      formData.walletAddress = account?.address;
+      formData.walletAddress = address;
       const response = await fetch(
         "http://localhost:4000/api/create_sponser_profile",
         {
@@ -53,31 +52,39 @@ export default function BecomeSponser() {
           body: JSON.stringify(formData),
         }
       );
+      console.log("response", response);
       if (response.ok) {
         toast({
           title: "You have become organiser now",
         });
         router.push("/dashboard");
       } else {
-        alert("Failed to create organiser profile");
+        const errorData = await response.json();
+        toast({
+          title: "Failed to create organiser profile",
+          description: errorData.message || "Unknown error occurred",
+        });
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while submitting the form");
+      toast({
+        title: "An error occurred while submitting the form",
+        description: (error as Error).message,
+      });
     }
   };
 
   return (
     <>
       <Navbar />
-      <div className="w-full h-[85vh] mt-24 flex justify-center items-center">
+      <div className="w-screen h-screen mt-24 flex justify-center items-center">
         <div className="w-[600px] flex justify-center items-center flex-col rounded-xl">
           <span className="text-slate-800 text-xl font-bold text-center p-2">
-            Welcome to Unipay
+            Welcome to UniPay
           </span>
           <form
-            onSubmit={handleSubmit}
             className="flex justify-center items-start flex-col shadow-md mt-4 w-full p-6"
+            onSubmit={handleSubmit}
           >
             <div className="flex justify-between items-center flex-row w-full">
               <div className="flex flex-col w-full mr-2">

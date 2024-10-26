@@ -1,30 +1,32 @@
 "use client";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import GlobeScene from "../../components/Globe";
+import { useChain } from "@cosmos-kit/react";
+// import { useToast } from "@chakra-ui/react";
+import { CHAIN_NAME } from "@/config";
 
 import { useState } from "react";
 const Banner = () => {
-
-  const { account } = useWallet();
+  const { address, status, connect } = useChain(CHAIN_NAME);
   // const { userType, setUserType }: any = useUser();
+  console.log("address ", address);
   const route = useRouter();
 
   const fetchUserType = async () => {
-    if (account === null) return;
+    if (address === null) return;
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/find_usertype/${account?.address}`
+        `http://localhost:4000/api/find_usertype/${address}`
       );
       if (response.ok) {
         const data = await response.json();
         if (data.userType !== "") {
           localStorage.setItem("userType", data.userType);
-          route.push("/dashboard");
+          // route.push("/dashboard");
         }
       } else {
         alert("Failed to create sponsor profile");
@@ -37,7 +39,7 @@ const Banner = () => {
 
   useEffect(() => {
     fetchUserType();
-  }, [account]);
+  }, [address]);
 
   return (
     <section className="px-2 py-20 bg-white min-h-screen md:px-0 mt-32">
@@ -126,7 +128,6 @@ const Banner = () => {
                     </svg>
                   </Link>
                 </div>
-              
               </div>
             </div>
           </div>

@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import React from 'react';
-import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
-import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+
+
 import Image from 'next/image';
-import { WalletSelector as ShadcnWalletSelector } from "@/components/WalletSelector";
+
 import { usePathname } from 'next/navigation';
 
 const Navbar2 = () => {
@@ -54,7 +54,7 @@ const Navbar2 = () => {
             >
               <Image src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAACUCAMAAADWBFkUAAAAMFBMVEXk5ueutLfo6eqrsbXq7O21ur2yt7qor7K6v8G/xMbFycvg4uPKztDd3+HZ3N7T1ticPKHzAAAEJklEQVR4nO2c2W4rIQxAZ8zOMPD/f3thpk2T3CyAiSESR1Wl5unINWZ1lmUymUwmk8lkMplMJpNJNnDQ2+ItSXHzwVlrnQv7dn4yJrB4ZwVTKv4cv5i2YV+G9OWL05Ixtl4R/5Q6jBdf2Oyt6LWyGyu+sFumHrsmlBzJlwfxwvXwjfnQ2/IEFvNa9cQMoQt+fZKwd+krt96qUTbILNmk63uHF0Ke6klnXXBvhtctqqsuhCLZvtEFLwtl145DbcsdYH+wtVdwQRfLRl3bR5eXjbALXWY12Ktc11V0Sd2aPEh0yYVQKRt16WVB18quTHNqWV83xE52YlsuqhMhQp25tQXhhLgsgEXZKtqau9WPsQQzlLJxv4CDtog5zBhbUypQ2hqkLTOUJbd4XXuPJLTdMFPDGVw62aV4g/O/rSeTBYu3dWQVl2MHWcSSJS4XaFnCg6Yvs0UXsHXVdLZ42Wn7zPa7MuG7RhludXtAt9nhWUf3r6GbywpPbR/BCPc6qO35aUu5SUevExjlNhJdFATl3sFi92V0gyzdN2BtKdO24sLhFkkou9Qf3p4wSyoLDhdb6osolKwmPswHg5kgKCvCCSZxqV3jLr1aV3W4JkEcM5K7prJQewNFer54oW6xQHvSfKH2Wof6QudXtyYXiK8crik/D6M9Zr5lK01dpru5Jr5KNka3IBmY6PxAEPb81ypMb70fhMWym1nIlB7h6WXuLWqnBzX35DwOVGKUR6ILbEa99lW0W5s38F0/fynK5AjD6xqAYOSjADMmbfe3of8Dy+4EuxVmSulRX+Un42DF5ahBCutHNf2B89SfEYKPIeVjq6b85X+M2/6SzPYQnDVaiwNtzNH+MlTPTlRJrTlGHP0ut7Pw8UksYC4mxta9Zydmpg/WiFU9ayT5tY7K1vmlYyYD96kCvBa9KryxSJiw9Ng7xH9/0OrNfPswyoK8AMMWrKw9CFPMOE+Xw3yzIq9/5AlxNjaeJIVjnWrw8uNYQhK4+neLwxLf/ZPxBR5eLAzLYcJ9MH93nVmt8pEf2lLA5lrlwDVKf2L1CwH1mvk5bLWt6y9A04S9Q+5NJ7iyLrJyVMPwAvpa972ublXMAHnxmEWrNkTYPzS87lCuhWx2lyZaF3/0FMcXkWyDu2r0Q4QyXdx1D61sKg2IZMC1DlXp1ucu+oVHBfUvtIvuFJrpVi7KqlpKG1A1q9W2lGJhosIWfJ/IpjpWrlt8zdiQ8s4NbJcTAiaKQ9tPNi1wylbnLbpFEJT1HMHeVbawnRr6hjbt1PJ1e0y5t7CSpXnHgvBDQVlA9r+2QOXXXHxrHpr8zvruYyyhcocZ7x/aglTAd5Q2ILfkln9lzkfIXDi26MJpQOb38LTox2pA7lHTGLaZ32uz9552f8ja/abvUhuC3KIwCFmyk0b8A2RVN6tkAMtJAAAAAElFTkSuQmCC"} alt="" width={30} height={30} style={{borderRadius: "100px"}} />
             </Link>
-            <ShadcnWalletSelector />
+           
           </div>
         </div>
       </section>

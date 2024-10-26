@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function CreateGig() {
-  const { account } = useWallet();
+  const { address } = useWallet();
   const router = useRouter();
   const { toast } = useToast();
   const [formData, setFormData] = useState<any>({
@@ -40,7 +40,7 @@ export default function CreateGig() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (account === null) {
+    if (address === null) {
       toast({
         title: "Wallet connection required.",
         description: "You need to connect aptos wallet",
@@ -49,7 +49,7 @@ export default function CreateGig() {
     }
 
     try {
-      formData.walletAddress = account?.address;
+      formData.walletAddress = address?.address;
       const response = await fetch(`http://localhost:4000/api/create_bounty`, {
         method: "POST",
         headers: {

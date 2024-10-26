@@ -13,7 +13,7 @@ import { useToast } from "../ui/use-toast";
 export const provider = new Provider(Network.TESTNET);
 
 export default function DistributeBounty({ bountyId, winnerList }: any) {
-  const { account, signAndSubmitTransaction } = useWallet();
+  const { address, signAndSubmitTransaction } = useWallet();
   const [amt1, setAmt1] = useState<any>("");
   const [amt2, setAmt2] = useState<any>("");
   const [amt3, setAmt3] = useState<any>("");
@@ -26,7 +26,7 @@ export default function DistributeBounty({ bountyId, winnerList }: any) {
   const APTOS_COIN = "0x1::aptos_coin::AptosCoin";
 
   const aptsend = async () => {
-    if (!account) return router.push("/");
+    if (!address) return router.push("/");
     setTransactionInProgress(true);
 
     try {
@@ -43,7 +43,7 @@ export default function DistributeBounty({ bountyId, winnerList }: any) {
       // build a transaction payload to be submited
       const payload: InputTransactionData = {
         data: {
-          function: "0x1::aptos_account::batch_transfer",
+          function: "0x1::aptos_address::batch_transfer",
           typeArguments: [],
           functionArguments: [recipients, amounts],
         },
@@ -54,7 +54,7 @@ export default function DistributeBounty({ bountyId, winnerList }: any) {
       // wait for transaction
       await provider.waitForTransaction(response.hash);
 
-      // await fetchAccountBalance();
+      // await fetchaddressBalance();
 
       const response2 = await fetch(
         `http://localhost:4000/api/add_reward_distribution/${bountyId}`,

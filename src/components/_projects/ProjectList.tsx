@@ -9,14 +9,14 @@ import { useToast } from "../ui/use-toast";
 const WinnerList = ({ bountyId, winners, projects, handleRepick }: any) => {
   const { toast } = useToast();
   const router = useRouter();
-  const { account } = useWallet();
+  const { address } = useWallet();
 
   const handleAnnounce = async () => {
     try {
       console.log(projects);
 
       const response = await fetch(
-        `http://localhost:4000/api/add_winners/${bountyId}/${account?.address}`,
+        `http://localhost:4000/api/add_winners/${bountyId}/${address?.address}`,
         {
           method: "POST",
           headers: {

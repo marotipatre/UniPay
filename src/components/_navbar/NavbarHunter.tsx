@@ -9,7 +9,6 @@ import Image from 'next/image';
 //   MenuItem
 // } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation';
-import { WalletSelector } from '../WalletSelector';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -57,7 +56,7 @@ const Navbar = () => {
                 <MenuItem>My Submissions</MenuItem>
               </MenuList>
             </Menu> */}
-            <WalletSelector />
+            <Wallet onChainChange={onChainChange} />
           </div>
         </div>
       </section>

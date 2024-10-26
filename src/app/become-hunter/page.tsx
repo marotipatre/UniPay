@@ -9,9 +9,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "./sty;e.css";
 import { useToast } from "@/components/ui/use-toast";
+import { useChain } from "@cosmos-kit/react";
+// import { useToast } from "@chakra-ui/react";
+import { CHAIN_NAME } from "@/config";
 
 export default function BecomeHunter() {
-  const { account } = useWallet();
+  const { address, status, connect } = useChain(CHAIN_NAME);
   const router = useRouter();
   const { toast } = useToast();
   const [formData, setFormData] = useState<any>({
@@ -28,7 +31,7 @@ export default function BecomeHunter() {
   });
   // const toast = useToast()
   const [loading, setLoading] = useState<Boolean>(false);
-  console.log("account ", account);
+  console.log("address ", address);
 
   const handleChange = (e: any) => {
     setFormData({
@@ -40,7 +43,7 @@ export default function BecomeHunter() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (account === null) {
+    if (address === null) {
       toast({
         title: "Wallet connection required.",
         description: "You need to connect aptos wallet",
@@ -50,7 +53,7 @@ export default function BecomeHunter() {
 
     try {
       setLoading(true);
-      formData.walletAddress = account?.address;
+      formData.walletAddress = address;
       const response = await fetch(
         `http://localhost:4000/api/create_hunter_profile`,
         {

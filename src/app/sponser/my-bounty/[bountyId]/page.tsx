@@ -24,10 +24,10 @@ export default function Bounty({ params }: any) {
   const [projects, setProjects] = useState<any>([]);
   const [winnerList, setWinnerList] = useState<any>([]);
   const { bountyId } = params;
-  const { account } = useWallet();
+  const { address } = useWallet();
 
   const fetchSubmissions = async () => {
-    if (account === null) router.push("/");
+    if (address === null) router.push("/");
 
     try {
       const response = await fetch(
@@ -81,7 +81,7 @@ export default function Bounty({ params }: any) {
 
   useEffect(() => {
     fetchSubmissions();
-  }, [account]);
+  }, [address]);
 
   return (
     <>
@@ -207,7 +207,7 @@ export default function Bounty({ params }: any) {
             </div>
 
             <Tabs
-              defaultValue="account"
+              defaultValue="address"
               className="w-[850px] flex justify-start items-start flex-col mt-2 ml-2"
             >
               <TabsList>
