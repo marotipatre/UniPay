@@ -4,8 +4,7 @@ import Bounty from "@/components/_bounty/Bounty";
 import Footer from "@/components/_navbar/Footer";
 import Navbar from "@/components/_navbar/NavbarHunter";
 import Navbar2 from "@/components/_navbar/NavbarSponser";
-import { useUser } from "@/context/UserContext";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useChain } from "@cosmos-kit/react";
 // import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,20 +13,31 @@ import { useChain } from "@cosmos-kit/react";
 import { CHAIN_NAME } from "@/config";
 
 export default function Dashboard() {
-  const { address, status, connect } = useChain(CHAIN_NAME);
-  console.log(address);
+  const [chainName, setChainName] = useState(CHAIN_NAME);
+  function onChainChange(chainName?: string) {
+    setChainName(chainName || CHAIN_NAME);
+  }
+  const { chain,
+    status,
+    wallet,
+    username,
+    address,
+    message,
+    connect,
+    openView, } = useChain(localStorage.getItem("selected-chain"));
   const [bounties, setBounties] = useState<any>([]);
   const [loading, setLoading] = useState<Boolean>(false);
   const [user, setUser] = useState<any>("");
   const router = useRouter();
-  // const toast = useToast();
+  
+  console.log("chain_name", address,wallet);
+  //   const toast = useToast()
+
 
   const fetchBounties = async () => {
-    if (address === null) {
-      router.push("/");
-      return;
-    }
+    if (!address) router.push("/");
 
+  
     try {
       const response = await fetch(
         `http://localhost:4000/api/get_sponser_profile/${address}`
