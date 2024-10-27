@@ -4,12 +4,14 @@ import { useState } from "react";
 
 // import { FormControl, FormLabel, Input, Select, useToast } from "@chakra-ui/react";
 import ReactMarkdown from "react-markdown";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { CHAIN_NAME } from "@/config";
+import { useChain } from "@cosmos-kit/react";
 
 export default function CreateGig() {
-  const { address } = useWallet();
+  const { address, status, connect } = useChain(CHAIN_NAME);
   const router = useRouter();
   const { toast } = useToast();
   const [formData, setFormData] = useState<any>({
@@ -76,7 +78,7 @@ export default function CreateGig() {
       <div className="w-full mt-24 flex justify-center items-center">
         <div className="w-[600px] flex justify-center items-center flex-col rounded-xl">
           <span className="text-slate-800 text-xl font-bold text-center p-2">
-            Make Gig
+            Post Hackthon Prizes
           </span>
           <form
             className="flex justify-center items-start flex-col shadow-md mt-4 w-full p-6"
@@ -84,7 +86,7 @@ export default function CreateGig() {
           >
             <div className="flex flex-col w-full mr-2 mt-4">
               <label className="text-base text-slate-700 mb-2 ml-1">
-                Headline of bounty <span className="text-red-500">*</span>
+                Hackathon Name <span className="text-red-500">*</span>
               </label>
               <input
                 name="title"
@@ -97,7 +99,7 @@ export default function CreateGig() {
               />
             </div>
             <p style={{ fontSize: "15px" }} className="mt-4 mb-2">
-              Choose Gig category <span className="text-red-500">*</span>{" "}
+              Choose chains <span className="text-red-500">*</span>{" "}
             </p>
             <select
               className="text-[14px] w-full p-[6px] rounded-lg transition-all border-[2px] border-slate-300 outline-none focus:border-sky-500 focus:border-[3px]"
@@ -106,12 +108,12 @@ export default function CreateGig() {
               value={formData.category}
               onChange={handleChange}
             >
-              <option value="Bounty">Bounty</option>
-              <option value="Opportunity">Opportunity</option>
-              <option value="Freelance">Freelance</option>
+              <option value="Bounty">Cosmos HUB</option>
+              <option value="Opportunity">Agoric</option>
+              <option value="Freelance">Neutron</option>
             </select>
             <p style={{ fontSize: "15px" }} className="mt-4 mb-2">
-              Choose Gig type <span className="text-red-500">*</span>
+              Category <span className="text-red-500">*</span>
             </p>
             <select
               className="text-[14px] w-full p-[6px] rounded-lg transition-all border-[2px] border-slate-300 outline-none focus:border-sky-500 focus:border-[3px]"
@@ -140,7 +142,7 @@ export default function CreateGig() {
             </div>
             <div className="flex flex-col w-full mr-2 mt-4">
               <label className="text-base text-slate-700 mb-2 ml-1">
-                About Gig <span className="text-red-500">*</span>
+                About Hackathon <span className="text-red-500">*</span>
               </label>
               <input
                 placeholder="About your bounty"
@@ -181,26 +183,6 @@ export default function CreateGig() {
               </div>
             </div>
 
-            <p style={{ fontSize: "15px" }} className="mt-4 mb-2">
-              Judging criteria (markdown){" "}
-              <span className="text-red-400 ">*</span>
-            </p>
-            <div className="w-full">
-              <div className="editor">
-                <textarea
-                  // value={markdown}
-                  // onChange={(e) => setMarkdown(e.target.value)}
-                  name="judgingCriteria"
-                  value={formData.judgingCriteria}
-                  onChange={handleChange}
-                  placeholder="Judging criteria here..."
-                  className="w-full text-sm outline-none border-[1px] border-slate-200 rounded-md p-2 h-[100px]"
-                />
-              </div>
-              {/* <div className="preview">
-                                <ReactMarkdown>{markdown}</ReactMarkdown>
-                            </div> */}
-            </div>
 
             <p style={{ fontSize: "15px" }} className="mt-4 mb-2">
               Reward Distribution (markdown){" "}
@@ -224,7 +206,7 @@ export default function CreateGig() {
             </div>
 
             <p style={{ fontSize: "15px" }} className="mt-4 mb-2">
-              Submission requirements (markdown){" "}
+              Eligibility Criteria to claim (markdown){" "}
               <span className="text-red-400 ">*</span>
             </p>
             <div className="w-full">
@@ -268,7 +250,7 @@ export default function CreateGig() {
               type="submit"
               className="text-lg p-3 text-white bg-slate-800 rounded-lg w-full mt-6"
             >
-              Create Gig
+             Distribute 🚀
             </button>
           </form>
         </div>

@@ -8,6 +8,8 @@ import { useChain } from "@cosmos-kit/react";
 // import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useChain } from "@cosmos-kit/react";
+// import { useToast } from "@chakra-ui/react";
 import { CHAIN_NAME } from "@/config";
 
 export default function Dashboard() {
@@ -38,9 +40,8 @@ export default function Dashboard() {
   
     try {
       const response = await fetch(
-        `http://localhost:4000/api/find_usertype/${address}`
+        `http://localhost:4000/api/get_sponser_profile/${address}`
       );
-
       console.log("response", response);
       if (response.ok) {
         const data: any = await response.json();
@@ -52,41 +53,36 @@ export default function Dashboard() {
           //     isClosable: true,
           // })
           router.push("/");
+          return;
         }
 
-        try {
-          setLoading(true);
-          const response = await fetch(
-            data.userType === "sponser"
-              ? `http://localhost:4000/api/get_sponser_bounties/${address}`
-              : `http://localhost:4000/api/get_all_bounties`
-          );
-          if (response.ok) {
-            const data: any = await response.json();
-              console.log("data", data);
-            setBounties(data);
-            setLoading(false);
-          } else {
-            alert("Failed to load api");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-          alert("An error occurred while submitting the form");
+        setLoading(true);
+        const bountiesResponse = await fetch(
+          data.userType === "sponser"
+            ? `http://localhost:4000/api/get_sponser_bounties/${address}`
+            : `http://localhost:4000/api/get_all_bounties`
+        );
+        if (bountiesResponse.ok) {
+          const bountiesData: any = await bountiesResponse.json();
+          setBounties(bountiesData);
+          setLoading(false);
+        } else {
+          alert("Failed to load bounties");
         }
 
         localStorage.setItem("userType", data?.userType);
         setUser(data);
       } else {
-        alert("Failed to create sponsor profile");
+        alert("Failed to fetch user data");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   useEffect(() => {
     fetchBounties();
   }, [address]);
-
-  if (address) return;
 
   return (
     <>
