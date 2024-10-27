@@ -3,15 +3,18 @@
 // import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import Footer from "@/components/_navbar/Footer";
 import Navbar from "@/components/_navbar/Navbar";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 // import { useToast } from '@chakra-ui/react'
 import { useState } from "react";
 import "./sty;e.css";
 import { useToast } from "@/components/ui/use-toast";
 
+// import { useToast } from "@chakra-ui/react";
+import { CHAIN_NAME } from "@/config";
+import { useChain } from "@cosmos-kit/react";
+
 export default function BecomeHunter() {
-  const { account } = useWallet();
+  const { address, status, connect } = useChain(CHAIN_NAME);
   const router = useRouter();
   const { toast } = useToast();
   const [formData, setFormData] = useState<any>({
@@ -28,7 +31,7 @@ export default function BecomeHunter() {
   });
   // const toast = useToast()
   const [loading, setLoading] = useState<Boolean>(false);
-  console.log("account ", account);
+  console.log("address ", address);
 
   const handleChange = (e: any) => {
     setFormData({
@@ -40,17 +43,17 @@ export default function BecomeHunter() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (account === null) {
+    if (address === null) {
       toast({
         title: "Wallet connection required.",
-        description: "You need to connect aptos wallet",
+        description: "You need to connect COSMOS wallet",
       });
       return;
     }
 
     try {
       setLoading(true);
-      formData.walletAddress = account?.address;
+      formData.walletAddress = address;
       const response = await fetch(
         `http://localhost:4000/api/create_hunter_profile`,
         {

@@ -27,14 +27,16 @@ import {
 } from "@/components/ui/dialog";
 
 import { useEffect, useRef, useState } from "react";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import { formatDateToDDMMYYYYHM } from "@/components/formatDateToDDMMYYYYHM/formatDateToDDMMYYYYHM";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { useChain } from "@cosmos-kit/react";
+// import { useToast } from "@chakra-ui/react";
+import { CHAIN_NAME } from "@/config";
 
 export default function Bounty({ params }: any) {
-  const { account } = useWallet();
+  const {address, status, connect } = useChain(CHAIN_NAME);
   const [bounty, setBounty] = useState<any>([]);
   const [isSubmitted, setIsSubmitted] = useState<Boolean>(false);
   const router = useRouter();
@@ -59,7 +61,7 @@ export default function Bounty({ params }: any) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (account === null) {
+    if (address === null) {
       toast({
         title: "Wallet connection required.",
         description: "You need to connect aptos wallet",
@@ -69,9 +71,9 @@ export default function Bounty({ params }: any) {
     }
 
     try {
-      formData.walletAddress = account?.address;
+      formData.walletAddress = address;
       const response = await fetch(
-        `http://localhost:4000/api/create_bounty_submission/${bountyId}/${account?.address}`,
+        `http://localhost:4000/api/create_bounty_submission/${bountyId}/${address}`,
         {
           method: "POST",
           headers: {
@@ -95,7 +97,7 @@ export default function Bounty({ params }: any) {
   };
 
   const fetchBounty = async () => {
-    if (account === null) router.push("/");
+    if (address === null) router.push("/");
 
     try {
       const response = await fetch(
@@ -109,7 +111,7 @@ export default function Bounty({ params }: any) {
       }
 
       const response2 = await fetch(
-        `http://localhost:4000/api/checkBountySubmitted/${bountyId}/${account?.address}`
+        `http://localhost:4000/api/checkBountySubmitted/${bountyId}/${address}`
       );
       if (response2.ok) {
         const data: any = await response2.json();
@@ -126,7 +128,7 @@ export default function Bounty({ params }: any) {
 
   useEffect(() => {
     fetchBounty();
-  }, [bountyId, account]);
+  }, [bountyId, address]);
 
   return (
     <>
@@ -196,7 +198,7 @@ export default function Bounty({ params }: any) {
               <span className="text-lg text-slate-800 ml-4 mr-2">
                 {bounty?.budget}
               </span>
-              <span className="text-slate-400 text-base"> APT</span>
+              <span className="text-slate-400 text-base"> $</span>
             </div>
           </div>
           <div className="flex justify-center items-start flex-row mt-2">
@@ -219,7 +221,7 @@ export default function Bounty({ params }: any) {
                     <span className="text-lg font-bold text-slate-800">
                       {bounty.budget}
                     </span>
-                    <span className="ml-2">APT</span>
+                    <span className="ml-2">$</span>
                     <span className="text-slate-500 ml-4">Total Prizes</span>
                   </div>
                 </div>

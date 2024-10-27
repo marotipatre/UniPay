@@ -29,7 +29,7 @@ export default function FAQs() {
                 <AccordionItem value="item-3">
                     <AccordionTrigger>Which blockchains does UniPay support for reward transfers?</AccordionTrigger>
                     <AccordionContent>
-                        We leverage the Aptos blockchain for faster, more secure transactions. Our platform also includes built-in task verification and transparent reward distribution, ensuring efficiency and trust for both project owners and freelancers.
+                        We leverage the Cosmos blockchain for faster, more secure transactions. Our platform also includes built-in task verification and transparent reward distribution, ensuring efficiency and trust for both project owners and freelancers.
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">

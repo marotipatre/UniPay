@@ -24,10 +24,10 @@ export default function Bounty({ params }: any) {
   const [projects, setProjects] = useState<any>([]);
   const [winnerList, setWinnerList] = useState<any>([]);
   const { bountyId } = params;
-  const { account } = useWallet();
+  const { address } = useWallet();
 
   const fetchSubmissions = async () => {
-    if (account === null) router.push("/");
+    if (address === null) router.push("/");
 
     try {
       const response = await fetch(
@@ -81,7 +81,7 @@ export default function Bounty({ params }: any) {
 
   useEffect(() => {
     fetchSubmissions();
-  }, [account]);
+  }, [address]);
 
   return (
     <>
@@ -151,7 +151,7 @@ export default function Bounty({ params }: any) {
               <span className="text-lg text-slate-800 ml-4 mr-2">
                 {bounty?.budget}
               </span>
-              <span className="text-slate-400 text-base"> APT</span>
+              <span className="text-slate-400 text-base"> $</span>
             </div>
           </div>
           <div className="flex justify-center items-start flex-row mt-2">
@@ -174,7 +174,7 @@ export default function Bounty({ params }: any) {
                     <span className="text-lg font-bold text-slate-800">
                       {bounty?.budget}
                     </span>
-                    <span className="ml-2">APT</span>
+                    <span className="ml-2">$</span>
                     <span className="text-slate-500 ml-4">Total Prizes</span>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ export default function Bounty({ params }: any) {
             </div>
 
             <Tabs
-              defaultValue="account"
+              defaultValue="address"
               className="w-[850px] flex justify-start items-start flex-col mt-2 ml-2"
             >
               <TabsList>

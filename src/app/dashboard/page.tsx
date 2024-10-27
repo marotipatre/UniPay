@@ -4,28 +4,45 @@ import Bounty from "@/components/_bounty/Bounty";
 import Footer from "@/components/_navbar/Footer";
 import Navbar from "@/components/_navbar/NavbarHunter";
 import Navbar2 from "@/components/_navbar/NavbarSponser";
-import { useUser } from "@/context/UserContext";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { useChain } from "@cosmos-kit/react";
 // import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useChain } from "@cosmos-kit/react";
+// import { useToast } from "@chakra-ui/react";
+import { CHAIN_NAME } from "@/config";
 
 export default function Dashboard() {
-  //   const { userType }: any = useUser();
-  const { account } = useWallet();
+  const [chainName, setChainName] = useState(CHAIN_NAME);
+  function onChainChange(chainName?: string) {
+    setChainName(chainName || CHAIN_NAME);
+  }
+  const { chain,
+    status,
+    wallet,
+    username,
+    address,
+    message,
+    connect,
+    openView, } = useChain(localStorage.getItem("selected-chain"));
   const [bounties, setBounties] = useState<any>([]);
   const [loading, setLoading] = useState<Boolean>(false);
   const [user, setUser] = useState<any>("");
   const router = useRouter();
+  
+  console.log("chain_name", address,wallet);
   //   const toast = useToast()
 
-  const fetchBounties = async () => {
-    if (account === null) router.push("/");
 
+  const fetchBounties = async () => {
+    if (!address) router.push("/");
+
+  
     try {
       const response = await fetch(
-        `http://localhost:4000/api/find_usertype/${account?.address}`
+        `http://localhost:4000/api/get_sponser_profile/${address}`
       );
+      console.log("response", response);
       if (response.ok) {
         const data: any = await response.json();
         if (data.userType === "") {
@@ -36,41 +53,36 @@ export default function Dashboard() {
           //     isClosable: true,
           // })
           router.push("/");
+          return;
         }
 
-        try {
-          setLoading(true);
-          const response = await fetch(
-            data.userType === "sponser"
-              ? `http://localhost:4000/api/get_sponser_bounties/${account?.address}`
-              : `http://localhost:4000/api/get_all_bounties`
-          );
-          if (response.ok) {
-            const data: any = await response.json();
-
-            setBounties(data);
-            setLoading(false);
-          } else {
-            alert("Failed to load api");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-          alert("An error occurred while submitting the form");
+        setLoading(true);
+        const bountiesResponse = await fetch(
+          data.userType === "sponser"
+            ? `http://localhost:4000/api/get_sponser_bounties/${address}`
+            : `http://localhost:4000/api/get_all_bounties`
+        );
+        if (bountiesResponse.ok) {
+          const bountiesData: any = await bountiesResponse.json();
+          setBounties(bountiesData);
+          setLoading(false);
+        } else {
+          alert("Failed to load bounties");
         }
 
         localStorage.setItem("userType", data?.userType);
         setUser(data);
       } else {
-        alert("Failed to create sponsor profile");
+        alert("Failed to fetch user data");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   useEffect(() => {
     fetchBounties();
-  }, [account?.address]);
-
-  if (!account) return;
+  }, [address]);
 
   return (
     <>
