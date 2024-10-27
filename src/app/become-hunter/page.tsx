@@ -46,7 +46,7 @@ export default function BecomeHunter() {
     if (address === null) {
       toast({
         title: "Wallet connection required.",
-        description: "You need to connect aptos wallet",
+        description: "You need to connect COSMOS wallet",
       });
       return;
     }

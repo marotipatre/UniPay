@@ -87,7 +87,7 @@ export default function Bounty({ bounties, userType }: any) {
               <span className="text-lg text-slate-800 ml-4 mr-2">
                 {item.budget}
               </span>
-              <span className="text-slate-400 text-base"> APT</span>
+              <span className="text-slate-400 text-base"> $</span>
             </div>
           </Link>
         ))}
