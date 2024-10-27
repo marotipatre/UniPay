@@ -268,7 +268,7 @@ export default function CreateGig() {
               type="submit"
               className="text-lg p-3 text-white bg-slate-800 rounded-lg w-full mt-6"
             >
-              Create Gig
+             Distribute 🚀
             </button>
           </form>
         </div>

@@ -43,7 +43,7 @@ export default function BecomeSponser() {
     try {
       formData.walletAddress = address;
       const response = await fetch(
-        "http://localhost:4000/api/create_sponser_profile",
+        `http://localhost:4000/api/api/create_sponser_profile`,
         {
           method: "POST",
           headers: {

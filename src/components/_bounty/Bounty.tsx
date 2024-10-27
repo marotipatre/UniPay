@@ -1,13 +1,13 @@
 "use client";
-
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { formatDateToDDMMYYYYHM } from "../formatDateToDDMMYYYYHM/formatDateToDDMMYYYYHM";
+import { CHAIN_NAME } from "@/config";
+import { useChain } from "@cosmos-kit/react";
 
 export default function Bounty({ bounties, userType }: any) {
-  const { address } = useWallet();
+  
   console.log(bounties);
 
   return (

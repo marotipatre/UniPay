@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Network, Provider } from "aptos";
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
-import DistributeBounty from "@/components/_bounty/DistributeBounty";
+import DistributeBounty from "@/components/_bounty/creategig";
 import WinnerList from "@/components/winner_list/WinnerList";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

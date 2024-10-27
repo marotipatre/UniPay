@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
+import { Wallet } from "@/components/wallet";
 import Image from 'next/image';
 // import {
 //   Menu,
@@ -56,7 +56,7 @@ const Navbar = () => {
                 <MenuItem>My Submissions</MenuItem>
               </MenuList>
             </Menu> */}
-            <Wallet onChainChange={onChainChange} />
+            <Wallet/>
           </div>
         </div>
       </section>
