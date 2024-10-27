@@ -8,7 +8,6 @@ import { useChain } from "@cosmos-kit/react";
 // import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useChain } from "@cosmos-kit/react";
 // import { useToast } from "@chakra-ui/react";
 import { CHAIN_NAME } from "@/config";
 

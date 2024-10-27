@@ -53,6 +53,7 @@
     "@radix-ui/react-toast": "^1.2.1",
     "@react-three/drei": "^9.115.0",
     "@react-three/fiber": "^8.17.10",
+    "@skip-go/widget": "^2.5.2",
     "aptos": "^1.21.0",
     "chain-registry": "1.25.4",
     "class-variance-authority": "^0.7.0",
